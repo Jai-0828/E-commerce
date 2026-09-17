@@ -1,0 +1,141 @@
+
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(245, 245, 240, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s, background 0.2s;
+}
+ 
+.nav.scrolled {
+  background: rgba(255, 255, 255, 0.92);
+  border-bottom-color: var(--line);
+}
+ 
+.nav-inner {
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+ 
+.nav-brand {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: -0.01em;
+}
+ 
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+ 
+.nav-links a {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  transition: color 0.15s;
+}
+ 
+.nav-links a:hover {
+  color: var(--coral);
+}
+ 
+.nav-search {
+  display: flex;
+  align-items: center;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 8px 16px;
+}
+ 
+.nav-search input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 13px;
+  width: 200px;
+}
+ 
+.mobile-only { display: none; }
+ 
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+ 
+.icon-link {
+  position: relative;
+  font-size: 18px;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--white);
+  border: 1px solid var(--line);
+  transition: border-color 0.15s;
+}
+ 
+.icon-link:hover {
+  border-color: var(--coral);
+}
+ 
+.badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: var(--coral);
+  color: var(--white);
+  font-size: 10px;
+  font-weight: 700;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+ 
+.menu-toggle {
+  display: none;
+  font-size: 20px;
+}
+ 
+@media (max-width: 860px) {
+  .nav-links {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    background: var(--white);
+    border-bottom: 1px solid var(--line);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px 24px 28px;
+    gap: 18px;
+    transform: translateY(-8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.18s, opacity 0.18s;
+  }
+  .nav-links.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .desktop-only { display: none; }
+  .mobile-only { display: flex; width: 100%; }
+  .mobile-only input { width: 100%; }
+  .menu-toggle { display: block; }
+}
+ 

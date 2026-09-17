@@ -1,0 +1,19 @@
+.not-found {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 14px;
+  padding: 60px 24px;
+}
+.not-found-code {
+  font-family: 'Poppins', sans-serif;
+  font-size: 72px;
+  font-weight: 700;
+  color: var(--coral);
+  line-height: 1;
+}
+.not-found h1 { font-size: 22px; font-weight: 700; }
+.not-found p { color: var(--ink-soft); max-width: 340px; margin-bottom: 10px; }
