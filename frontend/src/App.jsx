@@ -5,6 +5,7 @@ import {
   Routes,
   Route,
   useLocation,
+  Navigate,
 } from "react-router-dom";
 
 import Nav from "./components/nav/Nav";
@@ -23,6 +24,20 @@ const Signup = lazy(() => import("./pages/signup/Signup"));
 const Login = lazy(() => import("./pages/login/Login"));
 const NotFound = lazy(() => import("./pages/notFound/NotFound"));
 
+// Check whether user is logged in
+function isAuthenticated() {
+  return Boolean(localStorage.getItem("token"));
+}
+
+// Protect pages that require login
+function ProtectedRoute({ children }) {
+  if (!isAuthenticated()) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return children;
+}
+
 function Layout() {
   const location = useLocation();
 
@@ -37,23 +52,67 @@ function Layout() {
       {!isAuthPage && <Nav />}
 
       {/* Pages */}
-      <Suspense fallback={<div className="page-loader">Loading…</div>}>
+      <Suspense fallback={<div className="page-loader">Loading...</div>}>
         <Routes>
+
           {/* Home */}
-          <Route path="/" element={<Home />} />
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
 
           {/* Shop */}
-          <Route path="/shop" element={<Shop />} />
-          <Route path="/shop/:category" element={<Shop />} />
+          <Route
+            path="/shop"
+            element={
+              <ProtectedRoute>
+                <Shop />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/shop/:category"
+            element={
+              <ProtectedRoute>
+                <Shop />
+              </ProtectedRoute>
+            }
+          />
 
           {/* Product */}
-          <Route path="/product/:id" element={<ProductDetails />} />
+          <Route
+            path="/product/:id"
+            element={
+              <ProtectedRoute>
+                <ProductDetails />
+              </ProtectedRoute>
+            }
+          />
 
           {/* Cart */}
-          <Route path="/cart" element={<Cart />} />
+          <Route
+            path="/cart"
+            element={
+              <ProtectedRoute>
+                <Cart />
+              </ProtectedRoute>
+            }
+          />
 
           {/* Wishlist */}
-          <Route path="/wishlist" element={<Wishlist />} />
+          <Route
+            path="/wishlist"
+            element={
+              <ProtectedRoute>
+                <Wishlist />
+              </ProtectedRoute>
+            }
+          />
 
           {/* Authentication */}
           <Route path="/login" element={<Login />} />
@@ -61,6 +120,7 @@ function Layout() {
 
           {/* 404 */}
           <Route path="*" element={<NotFound />} />
+
         </Routes>
       </Suspense>
 
